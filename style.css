@@ -1,0 +1,370 @@
+/* =========================================================
+   Сайт-визитка. Макет 1714 x 966.
+   1rem = 10px макета, всё масштабируется по ширине экрана.
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: calc(100vw / 171.4);
+}
+
+body {
+  font-family: 'Playfair Display', Georgia, serif;
+  background: #cdd6bd;
+  color: #000;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ---------- Сцена ---------- */
+.stage {
+  position: relative;
+  width: 100%;
+  height: max(96.6rem, 100vh);
+  overflow: hidden;
+  background: #cdd6bd;
+}
+
+/* ---------- Декор (картинки из макета) ---------- */
+.decor {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.decor img,
+.decor div {
+  position: absolute;
+  display: block;
+  height: auto;
+}
+
+/* верх прижат к верху, низ прижат к низу */
+.d-blob-top  { left: 24.4rem; top: 0;    width: 112.6rem; }
+.d-tube-top  { left: 14.55rem; top: 0;   width: 156.5rem; }
+.d-blob-left { left: 0; bottom: 0.4rem;  width: 61.7rem; }
+.d-tube-left { left: 0; bottom: 0.9rem;  width: 111rem; }
+
+/* тёмное пятно в правом верхнем углу */
+.d-corner {
+  right: -16.6rem;
+  top: -12rem;
+  width: 38rem;
+  height: 24rem;
+  border-radius: 50%;
+  background: radial-gradient(ellipse closest-side,
+    #667a3c 0%,
+    #718645 55%,
+    rgba(113, 134, 69, 0) 100%);
+}
+
+/* ---------- Фото ---------- */
+.photo {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 68.2rem;
+  height: auto;
+  z-index: 2;
+  
+  animation: photo-glow 3.5s linear infinite; /* Ускорил до 2 секунд, чтобы бежало бодрее */
+  will-change: filter;
+}
+
+@keyframes photo-glow {
+  0%, 100% {
+    filter:
+      drop-shadow(0 0 0.2rem rgba(255, 255, 255, 1))   
+      drop-shadow(0 -1.2rem 0.4rem rgba(255, 255, 255, 1)) /* Увеличил сдвиг до 1.2rem */
+      drop-shadow(0 -0.6rem 1.5rem rgba(255, 255, 255, 0.6)) /* Добавил шлейф */
+      drop-shadow(0 0 1rem rgba(255, 255, 255, 0.3));  
+  }
+  12.5% {
+    filter:
+      drop-shadow(0 0 0.2rem rgba(255, 255, 255, 1))
+      drop-shadow(0.85rem -0.85rem 0.4rem rgba(255, 255, 255, 1)) 
+      drop-shadow(0.42rem -0.42rem 1.5rem rgba(255, 255, 255, 0.6))
+      drop-shadow(0 0 1rem rgba(255, 255, 255, 0.3));
+  }
+  25% {
+    filter:
+      drop-shadow(0 0 0.2rem rgba(255, 255, 255, 1))
+      drop-shadow(1.2rem 0 0.4rem rgba(255, 255, 255, 1)) 
+      drop-shadow(0.6rem 0 1.5rem rgba(255, 255, 255, 0.6))
+      drop-shadow(0 0 1rem rgba(255, 255, 255, 0.3));
+  }
+  37.5% {
+    filter:
+      drop-shadow(0 0 0.2rem rgba(255, 255, 255, 1))
+      drop-shadow(0.85rem 0.85rem 0.4rem rgba(255, 255, 255, 1)) 
+      drop-shadow(0.42rem 0.42rem 1.5rem rgba(255, 255, 255, 0.6))
+      drop-shadow(0 0 1rem rgba(255, 255, 255, 0.3));
+  }
+  50% {
+    filter:
+      drop-shadow(0 0 0.2rem rgba(255, 255, 255, 1))
+      drop-shadow(0 1.2rem 0.4rem rgba(255, 255, 255, 1)) 
+      drop-shadow(0 0.6rem 1.5rem rgba(255, 255, 255, 0.6))
+      drop-shadow(0 0 1rem rgba(255, 255, 255, 0.3));
+  }
+  62.5% {
+    filter:
+      drop-shadow(0 0 0.2rem rgba(255, 255, 255, 1))
+      drop-shadow(-0.85rem 0.85rem 0.4rem rgba(255, 255, 255, 1)) 
+      drop-shadow(-0.42rem 0.42rem 1.5rem rgba(255, 255, 255, 0.6))
+      drop-shadow(0 0 1rem rgba(255, 255, 255, 0.3));
+  }
+  75% {
+    filter:
+      drop-shadow(0 0 0.2rem rgba(255, 255, 255, 1))
+      drop-shadow(-1.2rem 0 0.4rem rgba(255, 255, 255, 1)) 
+      drop-shadow(-0.6rem 0 1.5rem rgba(255, 255, 255, 0.6))
+      drop-shadow(0 0 1rem rgba(255, 255, 255, 0.3));
+  }
+  87.5% {
+    filter:
+      drop-shadow(0 0 0.2rem rgba(255, 255, 255, 1))
+      drop-shadow(-0.85rem -0.85rem 0.4rem rgba(255, 255, 255, 1)) 
+      drop-shadow(-0.42rem -0.42rem 1.5rem rgba(255, 255, 255, 0.6))
+      drop-shadow(0 0 1rem rgba(255, 255, 255, 0.3));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photo { animation: none; }
+}
+
+/* ---------- Заголовок ---------- */
+.hero {
+  position: absolute;
+  left: 4.5rem;
+  top: 7.9rem;
+  z-index: 3;
+  color: #fff;
+}
+
+.name {
+  font-weight: 400;
+  font-size: 5.5rem;
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+
+.title {
+  font-weight: 800;
+  font-size: 11.8rem;
+  line-height: 1;
+  margin-top: 1.9rem;
+  margin-left: -0.3rem;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.slogan {
+  display: flex;
+  align-items: center;
+  gap: 1.8rem;
+  margin-top: 1.6rem;
+  font-weight: 400;
+  font-size: 4.25rem;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.dot {
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0.3rem;
+  border-radius: 50%;
+  background: #fff;
+  flex-shrink: 0;
+}
+
+/* ---------- Кнопки ---------- */
+.buttons {
+  position: absolute;
+  left: 17rem;
+  top: 37.3rem;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 4.4rem;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50.2rem;
+  height: 8.6rem;
+  border-radius: 10rem;
+  background: #92a842;
+  color: #fff;
+  font-size: 3.6rem;
+  font-weight: 400;
+  box-shadow: 0 1rem 3rem rgba(40, 55, 20, 0.35);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+
+
+.btn:hover {
+  background: #a2bb35;
+  transform: scale(1.03);
+}
+
+/* ---------- Подвал с контактами ---------- */
+.footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 6.3rem;
+  z-index: 4;
+  background: #e3e7d8;
+}
+
+.contact {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  font-size: 2.5rem;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+}
+
+.contact:hover {
+  opacity: 0.65;
+}
+
+.contact img {
+  width: 4rem;
+  height: 4rem;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.contact:nth-child(1) { left: 4.6rem; }
+.contact:nth-child(2) { left: 45.6rem; }
+.contact:nth-child(3) { left: 85rem; }
+.contact:nth-child(4) { left: 141.2rem; }
+
+/* =========================================================
+   Планшеты и телефоны
+   ========================================================= */
+@media (max-width: 900px) {
+  html {
+    font-size: 16px;
+  }
+
+  .stage {
+    height: auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 20px 0;
+    background: #cdd6bd;
+  }
+
+  .decor {
+    display: none;
+  }
+
+  .hero,
+  .buttons,
+  .photo,
+  .footer {
+    position: static;
+  }
+
+  .hero {
+    text-align: center;
+    color: #3d4a24;
+  }
+
+  .name {
+    font-size: 30px;
+  }
+
+  .title {
+    font-size: clamp(34px, 11vw, 64px);
+    margin: 6px 0 0;
+    white-space: normal;
+    color: #2f3b1b;
+  }
+
+  .slogan {
+    justify-content: center;
+    white-space: normal;
+    font-size: 20px;
+    margin-top: 14px;
+    text-align: left;
+  }
+
+  .dot {
+    background: #3d4a24;
+  }
+
+  .photo {
+    order: 3;
+    align-self: flex-end;
+    width: min(88vw, 420px);
+    margin: 28px -20px 0 0;
+  }
+
+  .buttons {
+    order: 2;
+    margin-top: 28px;
+    gap: 16px;
+    width: 100%;
+    align-items: center;
+  }
+
+  .btn {
+    width: 100%;
+    max-width: 380px;
+    height: 64px;
+    font-size: 22px;
+  }
+
+  .btn:nth-child(2) {
+    margin-left: 0;
+  }
+
+  .footer {
+    order: 4;
+    width: calc(100% + 40px);
+    height: auto;
+    margin: 0 -20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .contact {
+    position: static;
+    transform: none;
+    font-size: 18px;
+    gap: 12px;
+  }
+
+  .contact img {
+    width: 36px;
+    height: 36px;
+  }
+}
